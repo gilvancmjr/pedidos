@@ -1,6 +1,7 @@
 package br.com.alurafood.pedidos.amqp;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import br.com.alurafood.pedidos.dto.PagamentosDto;
@@ -9,7 +10,9 @@ import br.com.alurafood.pedidos.dto.PagamentosDto;
 public class PagamentoListener {
 //deve salvar no banco mas no momente somente println
     @RabbitListener(queues = "pagamentos.detalhes-pedido")
-    public void recebeMensagem(PagamentosDto pagamentosDto) {
+    public void recebeMensagem(@Payload PagamentosDto pagamentosDto) {
+
+   
         String mensagem = """
             Dados do pagamento: %s
             Número do pedido: %s
